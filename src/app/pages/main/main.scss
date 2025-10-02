@@ -1,0 +1,31 @@
+.main-container {
+  text-align: center;
+  margin-top: 100px;
+
+  h1 {
+    color: #e60000;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 20px;
+  }
+
+  nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #0066ff;
+    font-weight: bold;
+
+    &.active {
+      text-decoration: underline;
+    }
+
+    &:hover {
+      color: #003399;
+    }
+  }
+}

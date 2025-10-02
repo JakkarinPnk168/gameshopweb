@@ -1,0 +1,92 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #fafafa;
+}
+
+.register-card {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 360px;
+  text-align: center;
+}
+
+.title {
+  color: #e60000;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  margin: 8px 0 4px;
+  color: #333;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #e60000;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s ease;
+
+  &:focus {
+    border-color: #ff3333;
+  }
+}
+
+button {
+  background: #e60000;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background: #cc0000;
+  }
+
+  &:disabled {
+    background: #f5a5a5;
+    cursor: not-allowed;
+  }
+}
+
+.footer-text {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #333;
+
+  a {
+    color: #0066ff;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: green;
+}

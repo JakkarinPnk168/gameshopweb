@@ -1,0 +1,45 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2 class="title">สมัครสมาชิก</h2>
+
+    <form (ngSubmit)="doRegister()" #registerForm="ngForm">
+      <label>ชื่อผู้ใช้</label>
+      <input
+        type="text"
+        [(ngModel)]="reg.name"
+        name="name"
+        required
+        placeholder="กรอกชื่อผู้ใช้"
+      />
+
+      <label>อีเมล</label>
+      <input
+        type="email"
+        [(ngModel)]="reg.email"
+        name="email"
+        required
+        placeholder="กรอกอีเมล"
+      />
+
+      <label>รหัสผ่าน</label>
+      <input
+        type="password"
+        [(ngModel)]="reg.password"
+        name="password"
+        required
+        placeholder="กรอกรหัสผ่าน"
+      />
+
+      <button type="submit" [disabled]="registerForm.invalid">
+        สมัครสมาชิก
+      </button>
+    </form>
+
+    <p class="footer-text">
+      ถ้าคุณเป็นสมาชิกอยู่แล้ว ?
+      <a routerLink="/login">เข้าสู่ระบบ</a>
+    </p>
+
+    <p class="message">{{ message }}</p>
+  </div>
+</div>

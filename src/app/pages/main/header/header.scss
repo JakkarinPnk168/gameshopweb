@@ -1,0 +1,57 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+  .xp { color: #e60000; }   // XP แดง
+  .shop { color: #000; }    // Shop ดำ
+}
+
+.nav {
+  display: flex;
+  gap: 25px;
+  font-size: 16px;
+
+  a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    transition: color .2s;
+    &:hover { color: #e60000; }
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn {
+  padding: 8px 16px;
+  font-size: 15px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &-login {
+    border: 1.5px solid #e60000;
+    color: #e60000;
+    background: #fff;
+    &:hover { background: #ffeaea; }
+  }
+
+  &-register {
+    border: 1.5px solid #e60000;
+    background: #e60000;
+    color: #fff;
+    &:hover { background: #cc0000; }
+  }
+}
