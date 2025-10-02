@@ -16,9 +16,15 @@ export class ApiService {
   }
 
   login(data: { email: string; password: string }) {
-    return this.http.post<{ success: boolean; userId?: string; message?: string; role?: string }>(
-      `${this.base}/login`,
-      data
-    );
-  }
+  return this.http.post<{
+    success: boolean;
+    userId?: string;
+    name?: string;
+    role?: string;
+    wallet?: number;
+    profileImage?: string;
+    message?: string;
+  }>(`${this.base}/login`, data);
+}
+
 }

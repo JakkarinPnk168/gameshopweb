@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  standalone: true,   // ✅ ต้องมี
+  standalone: true,
   imports: [RouterOutlet, FormsModule, HttpClientModule],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
