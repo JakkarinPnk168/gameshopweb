@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService, UserData } from '../../services/auth.service';
-import { Header } from '../main/header/header';
+import { Header } from '../header/header';
 
 @Component({
   selector: 'app-home',

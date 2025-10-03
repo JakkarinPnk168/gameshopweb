@@ -1,0 +1,154 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+  background: #fff;
+  border-bottom: 2px solid #eee;
+  font-size: 18px;
+  font-weight: 500;
+
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .logo {
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+
+    .xp {
+      color: red;
+    }
+    .shop {
+      color: black;
+    }
+  }
+
+  .nav {
+    display: flex;
+    gap: 20px;
+
+    a {
+      text-decoration: none;
+      color: #000;
+      font-size: 18px;
+      font-weight: 600;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+
+    .btn {
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-login {
+      background: #fff;
+      border: 2px solid red;
+      color: red;
+
+      &:hover {
+        background: red;
+        color: #fff;
+      }
+    }
+
+    .btn-register {
+      background: red;
+      border: 2px solid red;
+      color: #fff;
+
+      &:hover {
+        background: darkred;
+      }
+    }
+  }
+
+  .user-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+
+    .wallet {
+      font-size: 18px;
+      font-weight: bold;
+      color: #444;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      .material-symbols-outlined {
+        font-size: 22px;
+      }
+    }
+
+    .dropdown {
+      cursor: pointer;
+      position: relative;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      .arrow {
+        font-size: 22px;
+        transition: transform 0.2s;
+      }
+
+      &:hover .arrow {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        width: 220px;
+        list-style: none;
+        padding: 10px 0;
+        margin: 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+
+        li {
+          padding: 10px 16px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .material-symbols-outlined {
+            font-size: 22px;
+            color: #666;
+          }
+
+          &:hover {
+            background: #f8f8f8;
+            color: red;
+
+            .material-symbols-outlined {
+              color: red;
+            }
+          }
+        }
+      }
+    }
+  }
+}

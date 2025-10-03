@@ -15,36 +15,47 @@ import { AuthService } from '../../services/auth.service';
   providers: [ApiService]
 })
 export class Login {
-  // ✅ ใช้ identifier เพื่อรองรับทั้ง email/username
+  // ✅ ใช้ identifier (email หรือ username)
   loginData = { identifier: '', password: '' };
   message = '';
 
-  constructor(private api: ApiService, private router: Router, private auth: AuthService) {}
+  constructor(
+    private api: ApiService,
+    private router: Router,
+    private auth: AuthService
+  ) {}
 
   doLogin() {
     this.api.login({
-      email: this.loginData.identifier, // ✅ ส่งไป backend ใน field email
+      identifier: this.loginData.identifier,
       password: this.loginData.password
     }).subscribe({
       next: (res) => {
         if (res.success && res.userId) {
-          this.message = 'Login success';
+          this.message = 'เข้าสู่ระบบสำเร็จ ✅';
 
+          // ✅ เก็บข้อมูล user ลง AuthService
           this.auth.setUser({
             userId: res.userId,
             name: res.name || 'User',
+            email: res.email || '',
             role: res.role || 'user',
             wallet: res.wallet || 0,
             profileImage: res.profileImage || ''
           });
 
-          this.router.navigate(['/']);
+          // ✅ ตรวจ role แล้วเปลี่ยนหน้า
+          if (res.role === 'admin') {
+            this.router.navigate(['/dashboard']);  // admin → dashboard
+          } else {
+            this.router.navigate(['/home']);       // user → home
+          }
         } else {
-          this.message = res.message || 'Login failed';
+          this.message = res.message || 'เข้าสู่ระบบไม่สำเร็จ ❌';
         }
       },
       error: (err) => {
-        this.message = err.error?.message || 'Login failed';
+        this.message = err.error?.message || 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ ❌';
       }
     });
   }

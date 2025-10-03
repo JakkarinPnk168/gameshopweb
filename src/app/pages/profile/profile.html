@@ -1,0 +1,53 @@
+<app-header></app-header>
+
+<div class="profile-container" *ngIf="user">
+  <div class="profile-header">
+    <!-- user-info -->
+    <div class="user-info">
+      <img 
+        [src]="user.profileImage || 'assets/user.png'" 
+        alt="profile" 
+        class="avatar" 
+      />
+      <div class="details">
+        <h2>{{ user.name }}</h2>
+        <p>{{ user.email }}</p>
+      </div>
+    </div>
+
+    <!-- wallet -->
+    <div class="wallet-box">
+      <p>ยอดเงินคงเหลือ</p>
+      <h3>฿ {{ user.wallet | number:'1.2-2' }}</h3>
+      <button class="btn-topup">เติมเงิน</button>
+    </div>
+  </div>
+
+  <div class="menu-list">
+    <button routerLink="/cart">
+      <span class="material-symbols-outlined">shopping_cart</span>
+      <span class="text">ตะกร้าของฉัน</span>
+    </button>
+
+    <button routerLink="/history">
+      <span class="material-symbols-outlined">history</span>
+      <span class="text">ประวัติการซื้อ</span>
+    </button>
+
+    <button class="btn" (click)="goToProfileEdit()">
+  <span class="material-symbols-outlined">edit</span>
+  <span class="text">แก้ไขโปรไฟล์</span>
+</button>
+
+
+    <button routerLink="/library">
+      <span class="material-symbols-outlined">sports_esports</span>
+      <span class="text">คลังเกม</span>
+    </button>
+
+    <!-- ปุ่มออกจากระบบ → ข้อความตรงกลาง -->
+    <button (click)="logout()" class="logout">
+      ออกจากระบบ
+    </button>
+  </div>
+</div>

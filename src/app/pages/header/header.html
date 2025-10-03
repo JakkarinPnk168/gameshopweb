@@ -1,0 +1,57 @@
+<header class="header">
+  <div class="left">
+    <div class="logo">
+      <span class="xp">XP</span><span class="shop">Shop</span>
+    </div>
+
+    <!-- ✅ แสดงเมนูเฉพาะ user -->
+    <nav class="nav" *ngIf="user?.role === 'user'">
+      <a routerLink="/">หน้าแรก</a>
+      <a routerLink="/home">เกมทั้งหมด</a>
+    </nav>
+  </div>
+
+  <!-- ถ้ายังไม่ login -->
+  <div class="actions" *ngIf="!isLoggedIn">
+    <button class="btn btn-login" (click)="goLogin()">เข้าสู่ระบบ</button>
+    <button class="btn btn-register" (click)="goRegister()">สมัครสมาชิก</button>
+  </div>
+
+  <!-- ถ้า login แล้ว -->
+  <div class="user-menu" *ngIf="isLoggedIn && user">
+    <!-- ✅ wallet แสดงเฉพาะ user -->
+    <span class="wallet" *ngIf="user.role === 'user'">
+      <span class="material-symbols-outlined">account_balance_wallet</span>
+      {{ user.wallet | number:'1.2-2' }}
+    </span>
+
+    <!-- dropdown -->
+    <div class="dropdown" (click)="toggleDropdown()">
+      {{ user.name }}
+      <span class="material-symbols-outlined arrow">expand_more</span>
+      <ul class="dropdown-menu" *ngIf="dropdownOpen">
+        <li (click)="goProfile()">
+          <span class="material-symbols-outlined">person</span> โปรไฟล์
+        </li>
+
+        <!-- ✅ เมนูเฉพาะ user -->
+        <ng-container *ngIf="user.role === 'user'">
+          <li (click)="goCart()">
+            <span class="material-symbols-outlined">shopping_cart</span> ตะกร้าของฉัน
+          </li>
+          <li (click)="goHistory()">
+            <span class="material-symbols-outlined">history</span> ประวัติการซื้อ
+          </li>
+          <li (click)="goLibrary()">
+            <span class="material-symbols-outlined">sports_esports</span> คลังเกม
+          </li>
+        </ng-container>
+
+        <!-- ✅ ทั้ง user และ admin เห็น -->
+        <li (click)="logout()">
+          <span class="material-symbols-outlined">logout</span> ออกจากระบบ
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

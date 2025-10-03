@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<div class="dashboard-container" *ngIf="user">
+  <!-- ส่วนหัว (คล้ายโปรไฟล์) -->
+  <div class="dashboard-header">
+    <div class="user-info">
+      <img [src]="user.profileImage || 'assets/admin.png'" alt="admin" class="avatar" />
+      <div class="details">
+        <h2>{{ user.name }}</h2>
+        <p>{{ user.email }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- เมนู -->
+  <div class="menu-list">
+    <button (click)="goManageGames()">
+      <span class="material-symbols-outlined">sports_esports</span>
+      <span class="text">จัดการเกม</span>
+    </button>
+
+    <button (click)="logout()" class="logout">
+      <span class="material-symbols-outlined">logout</span>
+      ออกจากระบบ
+    </button>
+  </div>
+</div>

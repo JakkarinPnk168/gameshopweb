@@ -1,0 +1,64 @@
+<app-header></app-header>
+
+<div class="edit-profile-container">
+  <h2 class="title">แก้ไขโปรไฟล์</h2>
+
+  <form (ngSubmit)="saveProfile()" #form="ngForm" class="form-card">
+    <!-- รูปโปรไฟล์ -->
+    <div class="avatar-box">
+      <img [src]="previewImage || 'assets/user.png'" alt="profile" class="avatar" />
+      <label for="profileImage" class="upload-btn">
+        <span class="material-symbols-outlined">cloud_upload</span>
+        เปลี่ยนรูป
+      </label>
+      <input
+        id="profileImage"
+        type="file"
+        accept="image/*"
+        (change)="onFileSelected($event)"
+        hidden
+      />
+    </div>
+
+    <!-- ชื่อ -->
+    <div class="form-group">
+      <label for="name">ชื่อผู้ใช้</label>
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="user.name"
+        name="name"
+        required
+        placeholder="กรอกชื่อผู้ใช้"
+      />
+    </div>
+
+    <!-- อีเมล -->
+    <div class="form-group">
+      <label for="email">อีเมล</label>
+      <input
+        id="email"
+        type="email"
+        [(ngModel)]="user.email"
+        name="email"
+        required
+        placeholder="กรอกอีเมล"
+      />
+    </div>
+
+    <div class="button-group">
+      <button type="submit" [disabled]="form.invalid || loading" class="btn-save">
+        <span class="material-symbols-outlined">save</span>
+        {{ loading ? 'กำลังบันทึก...' : 'บันทึก' }}
+      </button>
+
+      <button type="button" class="btn-cancel" (click)="cancelEdit()">
+  <span class="material-symbols-outlined">cancel</span>
+  ยกเลิก
+</button>
+
+    </div>
+
+    <p class="message" *ngIf="message">{{ message }}</p>
+  </form>
+</div>
