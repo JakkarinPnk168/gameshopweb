@@ -1,8 +1,10 @@
 <header class="header">
   <div class="left">
     <div class="logo">
+    <button class="logo-btn" (click)="goXPShop()">
       <span class="xp">XP</span><span class="shop">Shop</span>
-    </div>
+    </button>
+  </div>
 
     <!-- ✅ แสดงเมนูเฉพาะ user -->
     <nav class="nav" *ngIf="user?.role === 'user'">

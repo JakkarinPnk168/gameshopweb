@@ -10,10 +10,10 @@ export class AdminGuard implements CanActivate {
     const user = this.auth.getUser();
 
     if (user && user.role === 'admin') {
-      return true; // ✅ อนุญาต
+      return true;
     }
 
-    // ❌ ถ้าไม่ใช่ admin → กลับหน้า home
+    // ถ้าไม่ใช่ admin → กลับหน้า home
     this.router.navigate(['/home']);
     return false;
   }

@@ -37,9 +37,15 @@
 
     <p class="footer-text">
       ถ้าคุณเป็นสมาชิกอยู่แล้ว ?
-      <a routerLink="/login">เข้าสู่ระบบ</a>
+      <button class="link-btn" (click)="goToLogin()">เข้าสู่ระบบ</button>
     </p>
+  </div>
+</div>
 
-    <p class="message">{{ message }}</p>
+<!-- ✅ Popup แจ้งเตือน -->
+<div class="popup-overlay" *ngIf="showPopup">
+  <div class="popup-box">
+    <p>{{ message }}</p>
+    <button class="popup-btn" (click)="showPopup = false">ตกลง</button>
   </div>
 </div>

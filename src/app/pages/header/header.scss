@@ -75,6 +75,7 @@
         background: darkred;
       }
     }
+    
   }
 
   .user-menu {
@@ -151,4 +152,25 @@
       }
     }
   }
+}
+.logo-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;   // ✅ ขนาดใหญ่กำลังดี
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition: transform 0.2s ease;
+
+  .xp {
+    color: #e60000;   // ✅ สีแดง
+  }
+
+  .shop {
+    color: #000;      // ✅ สีดำ
+  }
+
 }

@@ -31,7 +31,15 @@ export class Header {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  // ✅ เปลี่ยนหน้า
+  //////////เส้น
+   goXPShop() {
+    if (this.user?.role === 'admin') {
+      this.router.navigate(['/dashboard']); // ไปหน้า admin dashboard
+    } else {
+      this.router.navigate(['/home']); // ไปหน้า home ของ user
+    }
+  }
+  
   logout() {
     this.auth.clearUser();
     this.router.navigate(['/login']);  
