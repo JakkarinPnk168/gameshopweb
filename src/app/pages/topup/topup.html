@@ -1,0 +1,69 @@
+<app-header></app-header>
+
+<div class="topup-page-container">
+  <!-- กล่องหลักสำหรับฟอร์มเติมเงิน -->
+  <div class="topup-box">
+    <h2>เติมเงิน</h2>
+
+    <!-- Input สำหรับจำนวนเงิน -->
+    <div class="form-group">
+      <label for="amount">จำนวนเงิน(บาท)</label>
+      <input type="number" id="amount" [(ngModel)]="amount" placeholder="ระบุจำนวนเงิน" min="100">
+    </div>
+
+    <!-- ปุ่มเลือกจำนวนเงินสำเร็จรูป -->
+    <div class="form-group">
+      <label>เติมเงินขั้นต่ำ 100 บาท</label>
+      <div class="preset-buttons">
+        <button *ngFor="let preset of presetAmounts" 
+                [class.selected]="amount === preset"
+                (click)="setAmount(preset)">{{ preset }}</button>
+      </div>
+    </div>
+
+    <!-- ช่องทางการชำระเงิน -->
+    <div class="form-group">
+      <label>ตัวเลือกการชำระเงิน</label>
+      <div class="payment-methods-grid">
+        <div *ngFor="let method of paymentMethods" 
+             class="payment-method"
+             [class.selected]="selectedMethod === method"
+             (click)="selectedMethod = method">
+          <!-- ❗️ หมายเหตุ: คุณต้องเตรียมรูปภาพ icon สำหรับแต่ละช่องทางไว้ใน assets/payment-icons/ -->
+          <img [src]="'assets/payment-icons/' + method + '.png'" [alt]="method">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Input สำหรับเบอร์โทรศัพท์
+    <div class="form-group">
+        <input type="tel" [(ngModel)]="phoneNumber" placeholder="กรอกเบอร์โทรศัพท์ หรือ ">
+    </div> -->
+    
+    <!-- ปุ่มยืนยันการเติมเงิน -->
+    <button class="submit-button" (click)="submitTopUp()" [disabled]="isSubmitting || !amount || amount < 100">
+        {{ isSubmitting ? 'กำลังดำเนินการ...' : 'เติมเงิน' }}
+    </button>
+  </div>
+
+  <!-- กล่องแสดงประวัติการเติมเงิน -->
+  <div class="history-box">
+    <h3>ประวัติการเติมเงิน</h3>
+    <div *ngIf="isLoading" class="loading-history">กำลังโหลดประวัติ...</div>
+    
+    <ul *ngIf="!isLoading && history.length > 0" class="history-list">
+      <li *ngFor="let item of history">
+        <img [src]="'assets/payment-icons/' + item.method + '.png'" [alt]="item.method">
+        <div class="history-details">
+          <span>{{ item.method | titlecase }}</span>
+          <span class="history-date">{{ item.createdAt ? (item.createdAt | date:'dd/MM/yyyy, HH:mm') : '-' }}</span>
+        </div>
+        <span class="history-amount">+ {{ item.amount | number }} ฿</span>
+      </li>
+    </ul>
+
+    <p *ngIf="!isLoading && history.length === 0" class="no-history">ยังไม่มีประวัติการเติมเงิน</p>
+  </div>
+
+</div>
+

@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+<div class="history-container">
+  <h1>ประวัติการซื้อ</h1>
+
+  <div *ngIf="isLoading" class="loading">กำลังโหลดข้อมูล...</div>
+
+  <div *ngIf="!isLoading && orders.length === 0" class="no-history">
+    <p>ยังไม่มีประวัติการซื้อ</p>
+  </div>
+
+  <table *ngIf="!isLoading && orders.length > 0">
+    <thead>
+      <tr>
+        <th>ชื่อสินค้า</th>
+        <th>จำนวน</th>
+        <th>วันที่ทำรายการ</th>
+        <th>สถานะ</th>
+        <th>โค้ดที่ใช้แล้ว</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.gameName }}</td>
+        <td>{{ order.quantity }}</td>
+         <td>{{ order.createdAt ? (order.createdAt | date:'dd/MM/yyyy HH:mm') : '-' }}</td>
+        <td>{{ order.status }}</td>
+         <td>{{ order.redeemCode ? order.redeemCode : '-' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

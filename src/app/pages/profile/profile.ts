@@ -32,19 +32,23 @@ export class Profile {
     this.router.navigate(['/login']);
   }
 
-//   goToCart() {
-//     this.router.navigate(['/cart']);
-//   }
-
-//   goToHistory() {
-//     this.router.navigate(['/history']);
-//   }
-
-  goToProfileEdit() {
-    this.router.navigate(['/edit-profile']); // ✅ route ที่คุณตั้งชื่อ
+  goToCart() {
+    this.router.navigate(['/mycart']);
   }
 
-//   goToLibrary() {
-//     this.router.navigate(['/library']);
-//   }
+  goToHistory() {
+    this.router.navigate(['/history']);
+  }
+
+  goToProfileEdit() {
+    this.router.navigate(['/edit-profile']);
+  }
+
+  goTopup() {
+    this.router.navigate(['/topup']);
+  }
+
+  goToLibrary() {
+    this.router.navigate(['/mylibrary']);
+  }
 }

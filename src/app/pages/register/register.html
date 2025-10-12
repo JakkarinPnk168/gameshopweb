@@ -35,17 +35,10 @@
       </button>
     </form>
 
-    <p class="footer-text">
-      ถ้าคุณเป็นสมาชิกอยู่แล้ว ?
-      <button class="link-btn" (click)="goToLogin()">เข้าสู่ระบบ</button>
-    </p>
-  </div>
-</div>
-
-<!-- ✅ Popup แจ้งเตือน -->
-<div class="popup-overlay" *ngIf="showPopup">
-  <div class="popup-box">
-    <p>{{ message }}</p>
-    <button class="popup-btn" (click)="showPopup = false">ตกลง</button>
+    <!-- ✅ ข้อความไปหน้าเข้าสู่ระบบ -->
+    <div class="login-text">
+      เป็นสมาชิกอยู่แล้ว?
+      <span class="link" (click)="goToLogin()">เข้าสู่ระบบ</span>
+    </div>
   </div>
 </div>

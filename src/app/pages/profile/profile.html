@@ -19,17 +19,17 @@
     <div class="wallet-box">
       <p>ยอดเงินคงเหลือ</p>
       <h3>฿ {{ user.wallet | number:'1.2-2' }}</h3>
-      <button class="btn-topup">เติมเงิน</button>
+      <button class="btn-topup" (click)="goTopup()" >เติมเงิน</button>
     </div>
   </div>
 
   <div class="menu-list">
-    <button routerLink="/cart">
+    <button class="btn"(click)="goToCart()" >
       <span class="material-symbols-outlined">shopping_cart</span>
       <span class="text">ตะกร้าของฉัน</span>
     </button>
 
-    <button routerLink="/history">
+    <button class="btn" (click)="goToHistory()">
       <span class="material-symbols-outlined">history</span>
       <span class="text">ประวัติการซื้อ</span>
     </button>
@@ -40,7 +40,7 @@
 </button>
 
 
-    <button routerLink="/library">
+    <button (click)="goToLibrary()">
       <span class="material-symbols-outlined">sports_esports</span>
       <span class="text">คลังเกม</span>
     </button>

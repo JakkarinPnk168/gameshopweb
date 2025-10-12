@@ -88,3 +88,24 @@ button {
   font-size: 14px;
   color: green;
 }
+
+.register-text {
+  text-align: center;
+  margin-top: 1.2rem;
+  font-size: 14px;
+  color: #555;
+
+  .link {
+    color: #e74c3c;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 4px;
+
+    &:hover {
+      color: #c0392b;
+      text-decoration-thickness: 2px;
+    }
+  }
+}
+

@@ -1,0 +1,112 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Kanit', sans-serif;
+}
+
+/* ✅ Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #e74c3c;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      i {
+        font-size: 18px;
+      }
+
+      &:hover,
+      &.active {
+        background-color: #c0392b;
+      }
+    }
+  }
+}
+
+/* ✅ เนื้อหาหลัก */
+.manage-content {
+  flex: 1;
+  background-color: #fafafa;
+  padding: 2rem;
+
+  h2 {
+    font-size: 1.6rem;
+    color: #222;
+    margin-bottom: 1.5rem;
+  }
+
+  .top-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+
+    input[type='date'] {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+  }
+
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    background: #fff;
+
+    thead {
+      background: #e74c3c;
+      color: #fff;
+
+      th {
+        padding: 14px 10px;
+        font-weight: 500;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #eee;
+        &:hover {
+          background: #fdf1ef;
+        }
+      }
+
+      td {
+        padding: 14px 12px;
+        text-align: center;
+        color: #333;
+      }
+    }
+  }
+
+  .message,
+  .loading {
+    text-align: center;
+    color: #777;
+    margin-top: 2rem;
+  }
+}

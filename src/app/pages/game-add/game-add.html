@@ -1,0 +1,48 @@
+<div class="add-game-container">
+  <h2>➕ เพิ่มข้อมูลเกม</h2>
+
+  <form (ngSubmit)="addGame()">
+    <div class="form-group">
+      <label>ชื่อเกม</label>
+      <input type="text" [(ngModel)]="name" name="name" required />
+    </div>
+
+    <div class="form-group">
+      <label>ราคา (บาท)</label>
+      <input type="number" [(ngModel)]="price" name="price" required />
+    </div>
+
+    <div class="form-group">
+      <label>ประเภทเกม</label>
+      <select [(ngModel)]="categoryId" name="categoryId" required>
+        <option value="" disabled selected>-- เลือกประเภทเกม --</option>
+        <option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>รายละเอียด</label>
+      <textarea [(ngModel)]="description" name="description"></textarea>
+    </div>
+
+    <!-- ✅ อัปโหลดรูป -->
+    <div class="upload-box">
+      <label class="upload-label">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <p>อัปโหลดรูปภาพเกม</p>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+      </label>
+
+      <!-- ✅ แสดงรูปตัวอย่างทันที -->
+      <div class="preview" *ngIf="previewUrl">
+        <img [src]="previewUrl" alt="preview" />
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? "⏳ กำลังบันทึก..." : "บันทึกข้อมูล" }}
+    </button>
+
+    <p class="message">{{ message }}</p>
+  </form>
+</div>

@@ -48,7 +48,7 @@ export class EditProfile implements OnInit {
     const file = input.files?.[0];
     if (!file) return;
 
-    // ตรวจชนิดและขนาดไฟล์เบื้องต้น
+    // ตรวจชนิดและขนาดไฟล์
     const okType = ['image/jpeg','image/png','image/webp','image/gif'].includes(file.type);
     if (!okType) {
       this.message = 'ไฟล์รูปต้องเป็น JPG/PNG/WebP/GIF';
@@ -62,7 +62,7 @@ export class EditProfile implements OnInit {
     this.selectedFile = file;
     const reader = new FileReader();
     reader.onload = () => (this.previewImage = reader.result);
-    reader.readAsDataURL(file); // ✅ แสดงพรีวิวทันที แต่ยังไม่อัปโหลด
+    reader.readAsDataURL(file); //แสดงพรีวิวทันที แต่ยังไม่อัปโหลด
   }
 
   saveProfile() {

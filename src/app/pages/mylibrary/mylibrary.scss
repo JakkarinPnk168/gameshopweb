@@ -1,0 +1,120 @@
+.library-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  .game-count {
+    color: #888;
+    margin-bottom: 30px;
+  }
+}
+
+.loading-indicator {
+  padding: 60px;
+  color: #888;
+}
+
+.content-box {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 25px;
+  text-align: left;
+}
+
+.game-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.game-image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.game-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0 0 5px 0;
+}
+
+.game-price {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.details-button {
+  background: none;
+  border: 1px solid #E50914;
+  color: #E50914;
+  border-radius: 5px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  margin-top: auto;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #E50914;
+    color: white;
+  }
+}
+
+.no-games-message {
+  padding: 60px 20px;
+  text-align: center;
+  
+  p {
+    font-size: 1.2rem;
+    color: #888;
+    margin-bottom: 25px;
+  }
+
+  .browse-button {
+    background-color: #E50914;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #b70710;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+<div class="library-container">
+  <h1>คลังเกมของฉัน</h1>
+  <p *ngIf="!isLoading" class="game-count">เกมที่มี {{ myGames.length }} เกม</p>
+
+  <div *ngIf="isLoading" class="loading-indicator">
+    <p>กำลังโหลดคลังเกม...</p>
+  </div>
+
+  <div *ngIf="!isLoading" class="content-box">
+    <div *ngIf="myGames.length > 0; else noGames" class="games-grid">
+      <!-- Game Card Loop -->
+      <div *ngFor="let game of myGames" class="game-card">
+        <img [src]="game.imageUrl" [alt]="game.name" class="game-image">
+        <div class="card-body">
+          <h3 class="game-name">{{ game.name }}</h3>
+          <p class="game-price">{{ game.price | currency:'THB':'symbol-narrow' }}</p>
+          <button class="details-button " (click)="goToGameDetail(game.id)">ดูรายละเอียด</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template for when there are no games -->
+    <ng-template #noGames>
+      <div class="no-games-message">
+        <p>คุณยังไม่มีเกมในคลัง</p>
+        <a routerLink="/" class="browse-button">เลือกซื้อเกม</a>
+      </div>
+    </ng-template>
+  </div>
+</div>

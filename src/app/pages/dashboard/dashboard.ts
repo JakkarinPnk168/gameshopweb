@@ -27,7 +27,7 @@ export class Dashboard implements OnInit {
   }
 
   goManageGames() {
-    this.router.navigate(['/manage-games']);
+    this.router.navigate(['/game-manage']);
   }
 
   logout() {

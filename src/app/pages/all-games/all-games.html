@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<main class="all-games-container">
+  <h1>เกมทั้งหมด</h1>
+
+  <div *ngIf="loading">กำลังโหลดเกม...</div>
+
+  <div class="games-grid" *ngIf="!loading && games.length > 0">
+    <div *ngFor="let game of games" class="game-card">
+      <a [routerLink]="['/game-detail', game.id]">
+        <img [src]="game.imageUrl" [alt]="game.name">
+        <h3>{{ game.name }}</h3>
+      </a>
+
+      <p *ngIf="game.category"><strong>หมวดหมู่:</strong> {{ game.category }}</p>
+      <p *ngIf="game.gameType"><strong>รูปแบบเกม:</strong> {{ game.gameType }}</p>
+      <p *ngIf="game.releasedAt">วางขาย: {{ game.releasedAt | date:'dd/MM/yyyy' }}</p>
+      <p>ราคา: {{ game.price | number:'1.0-0' }} ฿</p>
+
+      <button class="buy-button" (click)="buyGame(game)">ซื้อเกม</button>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && games.length === 0">
+    <p>ไม่มีเกมในหมวดหมู่นี้</p>
+  </div>
+</main>

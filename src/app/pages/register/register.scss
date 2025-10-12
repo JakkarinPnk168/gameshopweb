@@ -157,3 +157,24 @@ button {
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
+
+/* ✅ ข้อความเข้าสู่ระบบ (บรรทัดเดียวแบบ login) */
+.login-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #333;
+
+  .link {
+    color: #0066ff;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 4px;
+
+    &:hover {
+      color: #0040cc;
+      text-decoration-thickness: 2px;
+    }
+  }
+}

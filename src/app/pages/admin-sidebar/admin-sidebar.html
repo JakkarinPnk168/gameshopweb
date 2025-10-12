@@ -1,0 +1,16 @@
+<aside class="sidebar">
+  <ul>
+    <li [class.active]="activePage === 'game'" (click)="go('/game-manage')">
+      <i class="fa-solid fa-gamepad"></i> จัดการเกม
+    </li>
+    <li [class.active]="activePage === 'discount'" (click)="go('/discount')">
+      <i class="fa-solid fa-percent"></i> โค้ดส่วนลด
+    </li>
+    <li [class.active]="activePage === 'ranking'" (click)="go('/ranking')">
+      <i class="fa-solid fa-list-ol"></i> อันดับขายดี
+    </li>
+    <li [class.active]="activePage === 'transactions'" (click)="go('/transactions-user')">
+      <i class="fa-solid fa-clipboard-list"></i> ธุรกรรมผู้ใช้
+    </li>
+  </ul>
+</aside>

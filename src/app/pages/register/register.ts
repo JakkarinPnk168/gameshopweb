@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import Swal from 'sweetalert2'; // ✅ นำเข้า SweetAlert2
 
 @Component({
   selector: 'app-register',
@@ -13,11 +14,9 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./register.scss'],
   providers: [ApiService]
 })
-
 export class Register {
   reg = { name: '', email: '', password: '', profileImage: '' };
   message = '';
-  showPopup = false;
 
   constructor(private api: ApiService, private router: Router) {}
 
@@ -29,36 +28,45 @@ export class Register {
 
   doRegister() {
     if (!this.isPasswordStrong(this.reg.password)) {
-      this.showMessage('รหัสผ่านต้องมีอย่างน้อย 6 ตัว และมีตัวเลข');
+      this.showAlert('รหัสผ่านต้องมีอย่างน้อย 6 ตัว และมีตัวเลข', 'warning');
       return;
     }
 
     this.api.register(this.reg).subscribe({
       next: (res) => {
         if (res.success && res.userId) {
-          this.showMessage('สมัครสมาชิกสำเร็จ ✅');
-          setTimeout(() => this.router.navigate(['/login']), 1500);
+          // ✅ สมัครสำเร็จ
+          Swal.fire({
+            icon: 'success',
+            title: 'สมัครสมาชิกสำเร็จ!',
+            text: 'กำลังไปยังหน้าเข้าสู่ระบบ...',
+            timer: 2000,            // ปิดอัตโนมัติใน 2 วิ
+            showConfirmButton: false
+          });
+
+          // ✅ ไปหน้า login หลังปิด
+          setTimeout(() => this.router.navigate(['/login']), 2000);
         } else {
-          this.showMessage(res.message || 'สมัครไม่สำเร็จ ❌');
+          this.showAlert(res.message || 'สมัครไม่สำเร็จ ❌', 'error');
         }
       },
       error: (err) => {
-        this.showMessage(err.error?.message || 'เกิดข้อผิดพลาด ❌');
+        this.showAlert(err.error?.message || 'เกิดข้อผิดพลาด ❌', 'error');
       }
     });
   }
 
-  // ✅ ฟังก์ชันช่วยแสดง popup
-  private showMessage(msg: string) {
-    this.message = msg;
-    this.showPopup = true;
-    setTimeout(() => (this.showPopup = false), 2000);
+  // ✅ ฟังก์ชัน SweetAlert ช่วยแสดงข้อความ
+  private showAlert(msg: string, icon: 'success' | 'error' | 'warning') {
+    Swal.fire({
+      icon,
+      title: msg,
+      timer: 2000,
+      showConfirmButton: false
+    });
   }
 
   goToLogin() {
-  this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
+  }
 }
-
-
-}
-

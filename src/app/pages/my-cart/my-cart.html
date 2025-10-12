@@ -1,0 +1,51 @@
+<app-header></app-header>
+<div class="cart-container">
+  <h1>ตะกร้าของฉัน</h1>
+
+  <div class="cart-items-list">
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <label class="custom-checkbox">
+    <input 
+  type="checkbox" 
+  [(ngModel)]="item.selected" 
+  (change)="onSelectionChange(item.id, item.selected)">
+    <span class="checkmark"></span>
+  </label>
+
+      <img [src]="item.imageUrl" [alt]="item.name" class="item-image">
+
+      <div class="item-details">
+        <h3>{{ item.name }}</h3>
+        <!-- <p class="description">{{ item.description }}</p> -->
+         <!-- <p class="description">ส่วนลด: {{ discount | number:'1.0-0' }} ฿</p> -->
+         <p class="description" *ngIf="item.selected && !item.disabled">ส่วนลด: {{ discount | number:'1.0-0' }} ฿</p>
+        <p class="price">ราคา {{ item.price | number:'1.0-0' }} ฿</p>
+      </div>
+
+      <button class="remove-btn" (click)="removeItem(item.id)">ลบ</button>
+       <!-- <span *ngIf="item.disabled" class="text-muted">คุณมีเกมนี้แล้ว</span> -->
+    </div>
+  </div>
+
+  <div class="promo-code-section">
+    <input type="text" [(ngModel)]="promoCode" placeholder="กรอกโค้ดส่วนลด">
+    <button class="apply-code-btn" (click)="applyPromoCode()">ใช้โค้ด</button>
+    <!-- <p *ngIf="promoInvalid" class="text-error">โค้ดไม่ถูกต้อง</p> -->
+  </div>
+
+  <div class="summary-box">
+    <div class="summary-line">
+      <span>ยอดรวม</span>
+      <span>{{ subtotal | number:'1.2-2' }} ฿</span>
+    </div>
+    <div class="summary-line">
+      <span>ส่วนลด</span>
+      <span>- {{ discount | number:'1.2-2' }} ฿</span>
+    </div>
+    <div class="summary-line total">
+      <span>ราคาสุทธิ</span>
+      <span>{{ total | number:'1.2-2' }} ฿</span>
+    </div>
+    <button class="checkout-btn" (click)="checkout()">ซื้อเลย</button>
+  </div>
+</div>

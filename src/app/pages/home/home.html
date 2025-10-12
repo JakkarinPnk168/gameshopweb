@@ -4,3 +4,71 @@
   <h1>ยินดีต้อนรับสู่ XPShop</h1>
   <p>ร้านค้าเกมออนไลน์</p>
 </div>
+
+<main class="container">
+  <!-- Top Games -->
+  <section class="game-section">
+  <div class="section-header">
+    <h2>10 อันดับเกมจากยอดขาย</h2>
+    <div class="navigation-arrows">
+      <!-- ✅ เรียกฟังก์ชัน scroll -->
+      <button class="arrow" (click)="scrollLeft()">&lt;</button>
+      <button class="arrow" (click)="scrollRight()">&gt;</button>
+    </div>
+  </div>
+
+  <!-- ✅ เพิ่ม #topGamesList เพื่อผูกกับ ViewChild -->
+  <div class="games-list-horizontal" #topGamesList>
+    <div *ngFor="let game of topGames" class="game-card-top">
+      <a [routerLink]="['/game-detail', game.id]">
+        <img [src]="game.imageUrl" [alt]="game.name" />
+        <div class="rank-badge">{{ game.rank }}</div>
+        <h3>{{ game.name }}</h3>
+      </a>
+
+      <p class="release-date">
+        วันที่ขาย: {{ game.releasedAt ? (game.releasedAt | date:'dd/MM/yyyy') : '-' }}
+      </p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Recommended Games -->
+  <section class="game-section">
+    <div class="section-header">
+      <h2>เกมที่แนะนำ</h2>
+      <a routerLink="/allgames" class="view-all-btn">ดูทั้งหมด</a>
+    </div>
+
+    <div class="games-grid">
+      <div
+        *ngFor="let game of recommendedGames"
+        class="game-card-recommended"
+      >
+        <a [routerLink]="['/game-detail', game.id]">
+          <img [src]="game.imageUrl" [alt]="game.name" />
+          <h3>{{ game.name }}</h3>
+        </a>
+
+        <!-- ✅ แก้ตรงนี้ให้ปลอดภัย -->
+        <p class="release-date">
+          วันที่ขาย:
+          {{
+            game.releasedAt
+              ? (game.releasedAt | date : 'dd/MM/yyyy')
+              : '-'
+          }}
+        </p>
+
+        <p class="price">
+          ราคา {{ game.price | currency : 'THB' : 'symbol-narrow' }} บาท
+        </p>
+        <button class="buy-button" (click)="goToGameDetail(game.id)">
+  ซื้อ
+</button>
+
+      </div>
+    </div>
+  </section>
+</main>

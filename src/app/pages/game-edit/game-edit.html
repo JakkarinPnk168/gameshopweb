@@ -1,0 +1,49 @@
+<div class="edit-game-container">
+  <h2>🛠️ แก้ไขข้อมูลเกม</h2>
+
+  <form (ngSubmit)="onSubmit()" [hidden]="loading">
+    <div class="form-group">
+      <label>ชื่อเกม</label>
+      <input type="text" [(ngModel)]="game.name" name="name" required />
+    </div>
+
+    <div class="form-group">
+      <label>ราคา (บาท)</label>
+      <input type="number" [(ngModel)]="game.price" name="price" required />
+    </div>
+
+    <div class="form-group">
+      <label>ประเภทเกม</label>
+      <select [(ngModel)]="game.categoryId" name="categoryId" required>
+        <option value="">-- เลือกประเภทเกม --</option>
+        <option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>รายละเอียด</label>
+      <textarea [(ngModel)]="game.description" name="description"></textarea>
+    </div>
+
+    <div class="upload-box">
+      <label class="upload-label">
+        <span>📁 เปลี่ยนรูปภาพเกม</span>
+        <input type="file" (change)="onFileSelected($event)" />
+      </label>
+
+      <div class="preview" *ngIf="previewImage">
+        <img [src]="previewImage" alt="preview" />
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="loading">💾 บันทึกการแก้ไข</button>
+    <button type="button" class="back-btn" (click)="goBack()">🔙 กลับ</button>
+
+
+    <p class="message">{{ message }}</p>
+  </form>
+
+  <ng-template #loadingTpl>
+     <p class="loading" [hidden]="!loading">⏳ กำลังโหลดข้อมูล...</p>
+  </ng-template>
+</div>

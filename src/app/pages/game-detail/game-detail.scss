@@ -1,0 +1,242 @@
+/* --- CSS Variables --- */
+:root {
+  --primary-red: #E50914;
+  --light-red-border: #ffe3e3;
+  --background-color: #f9f9f9;
+  --card-background: #ffffff;
+  --text-primary: #111111;
+  --text-secondary: #666666;
+  --pill-background: #f5f5f5;
+}
+
+/* --- Main Layout --- */
+.game-detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 5rem auto;
+  background-color: var(--background-color);
+  padding: 1rem;
+}
+
+/* 🧱 Base Card Style (ใช้ได้ทั้งซ้ายและขวา) */
+.game-media,
+.game-info-card {
+  background-color: var(--card-background);
+  border-radius: 12px;
+  padding: 1.8rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
+  border: 2px solid transparent;
+}
+
+.game-media:hover,
+.game-info-card:hover {
+  border-color: var(--primary-red);
+  box-shadow: 0 8px 25px rgba(229, 9, 20, 0.15);
+  transform: translateY(-4px);
+}
+
+/* --- Left Column: Game Media --- */
+.game-media {
+  display: flex;
+  flex-direction: column;
+}
+
+.game-media .image-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.game-media .image-container img {
+  width: 100%;
+  border-radius: 12px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.game-media .image-container:hover img {
+  transform: scale(1.03);
+}
+
+.game-media .image-container .rank-badge-on-image {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgba(229, 9, 20, 0.9);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.game-media h1 {
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.game-media .rank-pill {
+  display: inline-block;
+  background-color: #fff;
+  border: 1.5px solid var(--primary-red);
+  color: var(--primary-red);
+  padding: 0.25rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.game-media .release-date {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* --- Right Column: Game Info Card --- */
+.game-info-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-info-card .cart-button-icon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 42px;
+  height: 42px;
+  background-color: var(--primary-red);
+  color: rgb(163, 48, 48);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(229, 9, 20, 0.25);
+}
+
+.game-info-card .cart-button-icon:hover {
+  background-color: #ff0707;
+  transform: scale(1.1);
+}
+
+.game-info-card .info-section {
+  flex-grow: 1;
+}
+
+.game-info-card .info-section p {
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.game-info-card .info-section p strong {
+  color: var(--text-primary);
+}
+
+.game-info-card .price-section {
+  margin-top: auto;
+  padding-top: 2rem;
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+}
+
+.game-info-card .price-section .price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary-red);
+}
+
+/* --- Action Buttons --- */
+/* --- Action Buttons --- */
+.game-info-card .action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* ปุ่มพื้นฐานทั้งหมด */
+.game-info-card .action-buttons .btn {
+  padding: 0.9rem 1.2rem;
+  font-family: 'Kanit', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  user-select: none;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+/* 🔴 ปุ่มซื้อเกม */
+.game-info-card .action-buttons .btn-buy {
+  background: linear-gradient(135deg, #e50914, #ff1e27);
+  color: #fff;
+  border: none;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, #ff0707, #ff3030);
+  }
+}
+
+/* 🛒 ปุ่มเพิ่มลงตะกร้า */
+.game-info-card .action-buttons .btn-add-to-cart {
+  background-color: #fff;
+  color: #e50914;
+  border: 2px solid #e50914;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(229, 9, 20, 0.15);
+
+  &:hover:not(:disabled) {
+    background-color: #ffe8e8;
+    border-color: #ff0707;
+    color: #b70710;
+    box-shadow: 0 4px 10px rgba(255, 7, 7, 0.3);
+  }
+}
+
+/* 🚫 Disabled */
+.game-info-card .action-buttons button:disabled {
+  background-color: #999;
+  color: #eee;
+  border: 2px solid #888;
+  cursor: not-allowed;
+  opacity: 0.8;
+  box-shadow: none;
+  transform: none;
+}
+
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .game-detail-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1rem;
+  }
+}

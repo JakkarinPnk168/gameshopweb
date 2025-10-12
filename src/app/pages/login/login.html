@@ -3,28 +3,33 @@
     <h2 class="title">เข้าสู่ระบบ</h2>
 
     <form (ngSubmit)="doLogin()" #loginForm="ngForm">
-  <label>อีเมลหรือชื่อผู้ใช้</label>
-  <input
-    type="text"
-    [(ngModel)]="loginData.identifier"
-    name="identifier"
-    required
-    placeholder="กรอกอีเมลหรือชื่อผู้ใช้"
-  />
+      <label>อีเมลหรือชื่อผู้ใช้</label>
+      <input
+        type="text"
+        [(ngModel)]="loginData.identifier"
+        name="identifier"
+        required
+        placeholder="กรอกอีเมลหรือชื่อผู้ใช้"
+      />
 
-  <label>รหัสผ่าน</label>
-  <input
-    type="password"
-    [(ngModel)]="loginData.password"
-    name="password"
-    required
-    placeholder="กรอกรหัสผ่าน"
-  />
+      <label>รหัสผ่าน</label>
+      <input
+        type="password"
+        [(ngModel)]="loginData.password"
+        name="password"
+        required
+        placeholder="กรอกรหัสผ่าน"
+      />
 
-  <button type="submit" [disabled]="loginForm.invalid">เข้าสู่ระบบ</button>
-</form>
+      <button type="submit" [disabled]="loginForm.invalid">เข้าสู่ระบบ</button>
+    </form>
 
-<p>{{ message }}</p>
+    <p class="error">{{ message }}</p>
 
+    <!-- ✅ ข้อความสมัครสมาชิก -->
+    <div class="register-text">
+      ยังไม่มีบัญชี?
+      <span class="link" (click)="goRegister()">สมัครสมาชิก</span>
+    </div>
   </div>
 </div>

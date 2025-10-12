@@ -1,0 +1,55 @@
+<app-header></app-header>
+
+<main class="game-detail-container" *ngIf="!loading && game">
+
+  <!-- 🧩 การ์ดซ้าย: ข้อมูลเกมหลัก -->
+  <section class="game-media card">
+    <div class="image-container">
+      <img [src]="game.imageUrl" [alt]="game.name + ' Game Cover'">
+      <span class="rank-badge-on-image" *ngIf="game.rank">{{ game.rank }}</span>
+    </div>
+
+    <h1>{{ game.name }}</h1>
+
+    <div class="subtitle-info" *ngIf="game.rank">
+      <span class="rank-pill">อันดับที่ {{ game.rank }}</span>
+    </div>
+
+    <p *ngIf="game.categoryName"><strong>หมวดหมู่เกม:</strong> {{ game.categoryName }}</p>
+
+    <p class="release-date" *ngIf="game.releasedAt">
+      <strong>วันที่วางขาย:</strong> {{ game.releasedAt | date:'d/M/y' }}
+    </p>
+  </section>
+
+  <!-- 🧩 การ์ดขวา: รายละเอียดเพิ่มเติม -->
+  <section class="game-info-card card">
+    <button class="cart-button-icon" (click)="addToCart()">
+      <span class="material-symbols-outlined">shopping_cart</span>
+    </button>
+
+    <div class="info-section">
+      <h3>{{ game.name }}</h3>
+      <p *ngIf="game.categoryName"><strong>หมวดหมู่เกม:</strong> {{ game.categoryName }}</p>
+      <p *ngIf="game.description"><strong>รายละเอียด:</strong> {{ game.description }}</p>
+    </div>
+
+    <div class="price-section" *ngIf="game.price">
+      <span>ราคาสินค้า</span>
+      <span class="price">{{ game.price | number:'1.0-0' }} ฿</span>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-buy" [disabled]="alreadyOwned" (click)="buyNow()">
+        {{ alreadyOwned ? 'มีอยู่แล้ว' : 'ซื้อเกมนี้' }}
+      </button>
+
+      <button class="btn btn-add-to-cart" [disabled]="alreadyOwned" (click)="addToCart()">
+        {{ alreadyOwned ? 'มีอยู่แล้ว' : 'เพิ่มลงตะกร้า' }}
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<div *ngIf="loading" class="loading-text">กำลังโหลดข้อมูลเกม...</div>

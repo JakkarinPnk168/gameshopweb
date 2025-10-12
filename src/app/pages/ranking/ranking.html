@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="dashboard-container">
+  <!-- ✅ Sidebar -->
+  <aside class="sidebar">
+    <ul>
+      <li (click)="goManageGames()"><i class="fa-solid fa-gamepad"></i> จัดการเกม</li>
+      <li (click)="goDiscount()"><i class="fa-solid fa-percent"></i> โค้ดส่วนลด</li>
+      <li class="active"><i class="fa-solid fa-list-ol"></i> อันดับขายดี</li>
+      <li (click)="goTransactionsUser()"><i class="fa-solid fa-clipboard-list"></i> ธุรกรรมผู้ใช้</li>
+    </ul>
+  </aside>
+
+  <!-- ✅ Main Content -->
+  <main class="manage-content">
+    <h2>🏆 อันดับขายดี</h2>
+
+    <div class="top-bar">
+      <input type="date" [(ngModel)]="selectedDate" (change)="onDateChange()" />
+    </div>
+
+    <div *ngIf="loading" class="loading">⏳ กำลังโหลดข้อมูล...</div>
+
+    <div *ngIf="!loading && games.length > 0" class="table-wrapper">
+      <table class="ranking-table">
+        <thead>
+          <tr>
+            <th>อันดับ</th>
+            <th>ชื่อเกม</th>
+            <th>ยอดขาย (ครั้ง)</th>
+            <th>ประจำวันที่</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let g of games; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ g.name }}</td>
+            <td>{{ g.totalSold || 0 }}</td>
+            <td>{{ selectedDate | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="message" *ngIf="message && !loading">{{ message }}</p>
+  </main>
+</div>

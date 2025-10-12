@@ -174,3 +174,113 @@
   }
 
 }
+/* --- Search Container --- */
+.search-container {
+  display: flex; /* จัดเรียง item ภายในแนวนอน */
+  align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+  width: 100%;
+  max-width: 450px; /* กำหนดความกว้างสูงสุด */
+  border: 1px solid #FF0707; /* สีขอบแดงอ่อน */
+  border-radius: 25px; /* ทำให้ขอบมน */
+  padding: 8px 10px 8px 20px; /* ระยะห่างภายใน (บน ขวา ล่าง ซ้าย) */
+  background-color: #fff;
+}
+
+/* --- Search Input Field --- */
+.search-input {
+  border: none; /* เอาเส้นขอบออก */
+  outline: none; /* เอาเส้น focus เวลาคลิกออก */
+  width: 100%; /* ทำให้ input ขยายเต็มพื้นที่ที่เหลือ */
+  font-size: 1rem; /* ขนาดตัวอักษร */
+  background: transparent; /* ทำให้พื้นหลังโปร่งใส */
+  font-family: 'Kanit', sans-serif; /* แนะนำให้ใช้ font เดียวกับเว็บ */
+}
+
+/* --- Placeholder Text Style --- */
+.search-input::placeholder {
+  color: #FF0707; /* สีแดงอ่อนสำหรับ placeholder */
+}
+
+/* --- Right side of search bar (Icon & Button) --- */
+.search-actions {
+  display: flex;
+  align-items: center;
+  color: #FF0707; /* สีแดงสำหรับไอคอนและข้อความ */
+}
+
+.search-icon {
+  font-size: 24px; /* ขนาดไอคอน */
+}
+
+/* --- Category Dropdown --- */
+.category-dropdown {
+  position: relative;
+  font-family: 'Kanit', sans-serif;
+
+  .category-selector {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: #FF0707;
+    font-size: 16px;
+
+    .material-symbols-outlined {
+      transition: transform 0.2s;
+    }
+
+    &:hover .material-symbols-outlined {
+      transform: rotate(180deg);
+    }
+  }
+
+  .category-menu {
+    position: absolute;
+    top: 40px; /* เลื่อนลงจากปุ่ม */
+    left: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 200px;
+    list-style: none;
+    padding: 8px 0;
+    margin: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    z-index: 1000;
+
+    li {
+      padding: 10px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .material-symbols-outlined {
+        font-size: 20px;
+        color: #666;
+      }
+
+      &:hover {
+        background: #f8f8f8;
+        color: red;
+
+        .material-symbols-outlined {
+          color: red;
+        }
+      }
+    }
+  }
+}
+.search-icon {
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: darkred;
+  }
+}

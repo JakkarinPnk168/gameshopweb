@@ -1,0 +1,62 @@
+<app-header></app-header>
+
+<div class="dashboard-container">
+  <app-admin-sidebar activePage="game"></app-admin-sidebar>
+
+  <!-- ✅ พื้นที่เนื้อหาหลัก -->
+  <main class="manage-content">
+    <h2>จัดการเกม</h2>
+
+    <!-- ✅ ปุ่มเพิ่มเกม -->
+    <div class="top-bar">
+      <button class="add-btn" (click)="goAdd()">
+        <i class="fa-solid fa-plus"></i> เพิ่มเกม
+      </button>
+    </div>
+
+    <!-- ✅ แสดงสถานะโหลด -->
+    <div *ngIf="loading" class="loading">
+      <i class="fa-solid fa-spinner fa-spin"></i> กำลังโหลดข้อมูล...
+    </div>
+
+    <!-- ✅ ตารางข้อมูล -->
+    <table *ngIf="!loading && paginatedGames.length > 0" class="game-table">
+      <thead>
+        <tr>
+          <th>รูป</th>
+          <th>ชื่อเกม</th>
+          <th>ราคา</th>
+          <th>ประเภท</th>
+          <th>วันที่วางขาย</th>
+          <th>การจัดการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let g of paginatedGames">
+          <td>
+            <img [src]="g.imageUrl" class="thumb" alt="game image" />
+          </td>
+          <td>{{ g.name }}</td>
+          <td>{{ g.price | currency: 'THB':'symbol':'1.0-0' }}</td>
+          <td>{{ getCategoryName(g.categoryId) }}</td>
+          <td>{{ gameService.formatReleasedAt(g.releasedAt) }}</td>
+          <td class="action-buttons">
+            <button class="edit-btn" (click)="goEdit(g.id!)" title="แก้ไข">
+              <i class="fa-solid fa-pen"></i>
+            </button>
+            <button class="delete-btn" (click)="deleteGame(g.id!)" title="ลบ">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ✅ เมื่อไม่มีข้อมูล -->
+    <div *ngIf="!loading && games.length === 0" class="empty">
+      ❌ ยังไม่มีข้อมูลเกมในระบบ
+    </div>
+
+   
+  </main>
+</div>

@@ -1,0 +1,178 @@
+<app-header></app-header>
+
+<div class="dashboard-container">
+  <!-- ✅ Sidebar -->
+  <aside class="sidebar">
+    <ul>
+      <li (click)="goManageGames()"><i class="fa-solid fa-gamepad"></i> จัดการเกม</li>
+      <li class="active" (click)="goDiscount()"><i class="fa-solid fa-percent"></i> โค้ดส่วนลด</li>
+      <li (click)="goRanking()"><i class="fa-solid fa-list-ol"></i> อันดับขายดี</li>
+      <li (click)="goTransactions()"><i class="fa-solid fa-clipboard-list"></i> ธุรกรรมผู้ใช้</li>
+    </ul>
+  </aside>
+
+  <!-- ✅ Main Content -->
+  <main class="manage-content">
+    <h2><i class="fa-solid fa-tags"></i> จัดการโค้ดส่วนลด</h2>
+
+    <div class="top-bar">
+      <button class="add-btn" (click)="openCreate()">
+        <i class="fa-solid fa-plus"></i> เพิ่มโค้ดใหม่
+      </button>
+      <p class="message">{{ message }}</p>
+    </div>
+
+    <div *ngIf="loading" class="loading">⏳ กำลังโหลดข้อมูล...</div>
+
+    <!-- ✅ ตารางแสดงส่วนลด -->
+    <div class="table-wrapper" *ngIf="!loading && discounts.length > 0">
+      <table class="discount-table">
+        <thead>
+          <tr>
+            <th>โค้ด</th>
+            <th>ประเภท</th>
+            <th>มูลค่า</th>
+            <th>ยอดขั้นต่ำ</th>
+            <th>จำนวนใช้/ทั้งหมด</th>
+            <th>วันหมดอายุ</th>
+            <th>สถานะ</th>
+            <th>จัดการ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of discounts">
+            <td>{{ d.code }}</td>
+            <td>{{ d.type === 'percent' ? 'เปอร์เซ็นต์' : 'จำนวนเงิน' }}</td>
+            <td>
+              {{ d.type === 'percent'
+                ? d.value + '%'
+                : (d.value | currency:'THB':'symbol':'1.0-0') }}
+            </td>
+            <td>{{ (d.minSpend || 0) | currency:'THB':'symbol':'1.0-0' }}</td>
+            <td>{{ d.usedCount || 0 }}/{{ d.usageLimit || 1 }}</td>
+            <td>{{ d.expireAt ? (d.expireAt | date:'dd/MM/yyyy') : '-' }}</td>
+            <td>
+              <span
+                class="status"
+                [ngClass]="{
+                  active: d.isActive && (d.usedCount || 0) < (d.usageLimit || 1),
+                  inactive: !d.isActive,
+                  full: (d.usedCount || 0) >= (d.usageLimit || 1)
+                }"
+              >
+                {{ d.status || (d.isActive
+                  ? ((d.usedCount || 0) >= (d.usageLimit || 1)
+                    ? 'ถูกใช้ครบแล้ว'
+                    : 'ใช้งานได้')
+                  : 'ถูกปิดใช้งาน') }}
+              </span>
+            </td>
+
+            <td class="action-buttons">
+              <button class="edit-btn" (click)="openEdit(d)">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+
+              <button class="toggle-btn" (click)="toggleActive(d)">
+                <i
+                  class="fa-solid"
+                  [class.fa-toggle-on]="d.isActive"
+                  [class.fa-toggle-off]="!d.isActive"
+                ></i>
+              </button>
+
+              <button class="delete-btn" (click)="delete(d)">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ✅ ไม่มีข้อมูล -->
+    <div *ngIf="!loading && discounts.length === 0" class="empty">
+      ❌ ยังไม่มีโค้ดส่วนลดในระบบ
+    </div>
+
+    <!-- ✅ ฟอร์มเพิ่ม/แก้ไข -->
+    <div class="form-panel" *ngIf="panelMode">
+      <div class="panel-content">
+        <button type="button" class="close-btn" (click)="cancelPanel()">×</button>
+        <h3>
+          {{ panelMode === 'create' ? '➕ เพิ่มโค้ดใหม่' : '✏️ แก้ไขโค้ดส่วนลด' }}
+        </h3>
+
+        <form (ngSubmit)="submit()">
+          <div class="form-group">
+            <label>โค้ดส่วนลด</label>
+            <input
+              type="text"
+              [(ngModel)]="form.code"
+              name="code"
+              required
+              [readonly]="panelMode === 'edit'"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>ประเภทส่วนลด</label>
+            <select [(ngModel)]="form.type" name="type">
+              <option value="percent">เปอร์เซ็นต์</option>
+              <option value="fixed">จำนวนเงิน</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>มูลค่าลด</label>
+            <input type="number" [(ngModel)]="form.value" name="value" required />
+          </div>
+
+          <div class="form-group">
+            <label>ยอดสั่งซื้อขั้นต่ำ (บาท)</label>
+            <input type="number" [(ngModel)]="form.minSpend" name="minSpend" />
+          </div>
+
+          <div class="form-group" *ngIf="form.type === 'percent'">
+            <label>ส่วนลดสูงสุด (บาท)</label>
+            <input
+              type="number"
+              [(ngModel)]="form.maxDiscount"
+              name="maxDiscount"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>จำนวนครั้งรวม (โค้ดนี้ใช้ได้)</label>
+            <input
+              type="number"
+              [(ngModel)]="form.usageLimit"
+              name="usageLimit"
+              min="1"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>วันหมดอายุ</label>
+            <input type="date" [(ngModel)]="form.expireAt" name="expireAt" />
+          </div>
+
+          <div class="form-group switch-group">
+            <label>สถานะการใช้งาน</label>
+            <label class="switch">
+              <input type="checkbox" [(ngModel)]="form.isActive" name="isActive" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="save-btn" [disabled]="loading">
+              💾 {{ loading ? 'กำลังบันทึก...' : (panelMode === 'create' ? 'เพิ่มโค้ด' : 'อัปเดต') }}
+            </button>
+            <button type="button" class="cancel-btn" (click)="cancelPanel()">ยกเลิก</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>

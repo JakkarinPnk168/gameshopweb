@@ -1,0 +1,46 @@
+<app-header></app-header>
+
+<div class="dashboard-container">
+  <!-- ✅ Sidebar -->
+  <aside class="sidebar">
+    <ul>
+      <li (click)="goManageGames()"><i class="fa-solid fa-gamepad"></i> จัดการเกม</li>
+      <li (click)="goDiscount()"><i class="fa-solid fa-percent"></i> โค้ดส่วนลด</li>
+      <li (click)="goRanking()"><i class="fa-solid fa-list-ol"></i> อันดับขายดี</li>
+      <li class="active"><i class="fa-solid fa-clipboard-list"></i> ธุรกรรมผู้ใช้</li>
+    </ul>
+  </aside>
+
+  <!-- ✅ Main Content -->
+  <main class="manage-content">
+    <h2>📜 ธุรกรรมผู้ใช้</h2>
+
+    <div *ngIf="loading" class="loading">⏳ กำลังโหลดข้อมูล...</div>
+
+    <div class="table-wrapper" *ngIf="!loading && transactions.length > 0">
+  <table class="transaction-table">
+    <thead>
+      <tr>
+        <th>ผู้ใช้</th>
+        <th>ประเภท</th>
+        <th>จำนวนเงิน</th>
+        <th>วันที่</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of transactions">
+        <td>{{ t.userName }}</td>
+        <td>{{ t.type }}</td>
+        <td>฿{{ t.amount | number:'1.0-0' }}</td>
+        <td>{{ formatDate(t.createdAt) }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <div *ngIf="!loading && transactions.length === 0" class="empty">
+      ❌ ยังไม่มีธุรกรรมในระบบ
+    </div>
+  </main>
+</div>

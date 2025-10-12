@@ -1,0 +1,103 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Kanit', sans-serif;
+}
+
+/* ✅ Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #e74c3c;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      i {
+        font-size: 18px;
+      }
+
+      &:hover,
+      &.active {
+        background-color: #c0392b;
+      }
+    }
+  }
+}
+
+/* ✅ พื้นที่เนื้อหาหลัก */
+.manage-content {
+  flex: 1;
+  background-color: #fafafa;
+  padding: 2rem;
+
+  h2 {
+    font-size: 1.6rem;
+    color: #222;
+    margin-bottom: 1.5rem;
+  }
+
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  /* ✅ ตารางธุรกรรมผู้ใช้ */
+  .transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    background: #fff;
+
+    thead {
+      background: #e74c3c;
+      color: #fff;
+
+      th {
+        padding: 14px 10px;
+        font-weight: 500;
+        text-align: center;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #eee;
+        transition: 0.2s;
+
+        &:hover {
+          background: #fdf1ef;
+        }
+      }
+
+      td {
+        padding: 14px 12px;
+        text-align: center;
+        color: #333;
+      }
+    }
+  }
+
+  .loading,
+  .empty {
+    text-align: center;
+    color: #777;
+    margin-top: 2rem;
+  }
+}
